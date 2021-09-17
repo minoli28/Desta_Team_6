@@ -1,7 +1,7 @@
 <template>
   <div class="container is-max-desktop">
     <div class="box ">
-        <p class="content"><b>User Form</b> {{ selected }}</p>
+        <p class="content"><b>User Form</b></p>
       <section align="left">
         <b-field label="Name">
           <b-input v-model="user.name"></b-input>
@@ -26,12 +26,12 @@
           <b-input v-model=""></b-input>
         </b-field> -->
         <b-field label="Telephone">
-          <b-input v-model="name"></b-input>
+          <b-input v-model="user.telephone"></b-input>
         </b-field>
 
         <b-field label="Choose Industry Interest">
           <b-taginput
-            v-model="tags"
+            v-model="user.tags"
             :data="filteredTags"
             autocomplete
             :allow-new="true"
@@ -43,9 +43,12 @@
           </b-taginput>
         </b-field>
         Interest:{{ user.interest }}
-        <pre style="max-height: 400px"><b>Tags:</b>{{ tags }}</pre>
+        <pre style="max-height: 400px"><b>Tags:</b>{{ user.tags }}</pre>
       </section>
-        <button class="button is-primary" style="margin-top: 5px">Sign in</button>
+        <button @click="ShowText=true" class="button is-primary" style="margin-top: 5px">Submit</button>
+    </div>
+    <div v-if="ShowText">
+      <pre style="max-height: 400px"><b>User Object:</b>{{ user }}</pre>
     </div>
   </div>
 </template>
@@ -54,6 +57,7 @@
 export default {
   data() {
     return {
+      ShowText: false,
       user: {},
       tags: [],
       filteredTags: [],

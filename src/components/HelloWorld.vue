@@ -1,13 +1,14 @@
 <template>
   <div class="container is-max-desktop">
     <div class="box">
-        <h2 class="content"><b>Business Form</b> {{ selected }}</h2>
-      <section align= "left">
+      <h2 class="content"><b>Business Form</b></h2>
+      <section align="left">
         <b-field label="Name">
           <b-input v-model="business.name"></b-input>
         </b-field>
         <b-field label="Email">
-          <b-input type="email" v-model="business.email" maxlength="30"> </b-input>
+          <b-input type="email" v-model="business.email" maxlength="30">
+          </b-input>
         </b-field>
         <b-field label="Choose an Industry">
           <b-autocomplete
@@ -29,7 +30,16 @@
           <b-input v-model="business.telephone"></b-input>
         </b-field>
       </section>
-      <button class="button is-primary" style="margin-top: 10px">Sign in</button>
+      <button
+        @click="ShowText = true"
+        class="button is-primary"
+        style="margin-top: 5px"
+      >
+        Submit
+      </button>
+    </div>
+    <div v-if="ShowText">
+      <pre style="max-height: 400px"><b>Business Object:</b>{{ business }}</pre>
     </div>
   </div>
 </template>
@@ -38,7 +48,8 @@
 export default {
   data() {
     return {
-      business: {industry: ""},
+      ShowText: false,
+      business: { industry: "" },
       data: [
         "Industrial Unions",
         "Insurance",
@@ -64,7 +75,7 @@ export default {
         "Mining",
       ],
       name: "",
-      
+
       selected: null,
     };
   },
