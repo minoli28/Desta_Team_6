@@ -1,18 +1,18 @@
 <template>
   <div class="container is-max-desktop">
-    <div class="box">
-        <h2 class="content"><b>Business Form</b> {{ selected }}</h2>
-      <section align= "left">
+    <div class="box ">
+        <p class="content"><b>User Form</b> {{ selected }}</p>
+      <section align="left">
         <b-field label="Name">
-          <b-input v-model="business.name"></b-input>
+          <b-input v-model="user.name"></b-input>
         </b-field>
         <b-field label="Email">
-          <b-input type="email" v-model="business.email" maxlength="30"> </b-input>
+          <b-input type="email" v-model="user.email" maxlength="30"> </b-input>
         </b-field>
-        <b-field label="Choose an Industry">
+        <b-field label="Choose Industry Interest">
           <b-autocomplete
             rounded
-            v-model="business.industry"
+            v-model="name"
             :data="filteredDataArray"
             placeholder="e.g. Mining"
             icon="magnify"
@@ -22,14 +22,30 @@
             <template #empty>No results found</template>
           </b-autocomplete>
         </b-field>
-        <b-field label="Location">
-          <b-input v-model="business.location"></b-input>
-        </b-field>
+        <!-- <b-field label="Location">
+          <b-input v-model=""></b-input>
+        </b-field> -->
         <b-field label="Telephone">
-          <b-input v-model="business.telephone"></b-input>
+          <b-input v-model="name"></b-input>
         </b-field>
+
+        <b-field label="Choose Industry Interest">
+          <b-taginput
+            v-model="tags"
+            :data="filteredTags"
+            autocomplete
+            :allow-new="true"
+            field="user.interest"
+            icon="label"
+            placeholder="Add an Interest"
+            @typing="getFilteredTags"
+          >
+          </b-taginput>
+        </b-field>
+        Interest:{{ user.interest }}
+        <pre style="max-height: 400px"><b>Tags:</b>{{ tags }}</pre>
       </section>
-      <button class="button is-primary" style="margin-top: 10px">Sign in</button>
+        <button class="button is-primary" style="margin-top: 5px">Sign in</button>
     </div>
   </div>
 </template>
@@ -38,7 +54,11 @@
 export default {
   data() {
     return {
-      business: {industry: ""},
+      user: {},
+      tags: [],
+      filteredTags: [],
+      isSelectOnly: false,
+      allowNew: false,
       data: [
         "Industrial Unions",
         "Insurance",
@@ -64,9 +84,21 @@ export default {
         "Mining",
       ],
       name: "",
-      
       selected: null,
     };
+  },
+  methods: {
+    getFilteredTags(text) {
+      console.log(text)
+      this.filteredTags = this.data.filter((option) => {
+        return (
+          option
+            .toString()
+            .toLowerCase()
+            .indexOf(text.toLowerCase()) >= 0
+        );
+      });
+    },
   },
   computed: {
     filteredDataArray() {
@@ -75,7 +107,7 @@ export default {
           option
             .toString()
             .toLowerCase()
-            .indexOf(this.business.industry.toLowerCase()) >= 0
+            .indexOf(this.name.toLowerCase()) >= 0
         );
       });
     },
