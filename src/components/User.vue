@@ -1,7 +1,7 @@
 <template>
   <div class="container is-max-desktop">
     <div class="box ">
-        <p class="content"><b>User Form</b> {{ selected }}</p>
+        <p class="content"><b>User Form</b> </p>
       <section align="left">
         <b-field label="Name">
           <b-input v-model="user.name"></b-input>
