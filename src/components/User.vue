@@ -9,19 +9,6 @@
         <b-field label="Email">
           <b-input type="email" v-model="user.email" maxlength="30"> </b-input>
         </b-field>
-        <b-field label="Choose Industry Interest">
-          <b-autocomplete
-            rounded
-            v-model="name"
-            :data="filteredDataArray"
-            placeholder="e.g. Mining"
-            icon="magnify"
-            clearable
-            @select="(option) => (selected = option)"
-          >
-            <template #empty>No results found</template>
-          </b-autocomplete>
-        </b-field>
         <!-- <b-field label="Location">
           <b-input v-model=""></b-input>
         </b-field> -->
@@ -42,8 +29,6 @@
           >
           </b-taginput>
         </b-field>
-        Interest:{{ user.interest }}
-        <pre style="max-height: 400px"><b>Tags:</b>{{ user.tags }}</pre>
       </section>
         <button @click="ShowText=true" class="button is-primary" style="margin-top: 5px">Submit</button>
     </div>
