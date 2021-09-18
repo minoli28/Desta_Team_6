@@ -36,7 +36,7 @@
       <pre style="max-height: 400px"><b>User Object:</b>{{ user }}</pre>
     </div>
     <a href="/businessform">
-    <p class="content" ><b>Not a User? Use this form</b></p>
+    <p class="content" ><b>Not an Individual? Use this form</b></p>
     </a>
   </div>
 </template>

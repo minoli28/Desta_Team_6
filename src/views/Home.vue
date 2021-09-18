@@ -7,7 +7,7 @@
     <div class="container has-text-centered">
         <div class="buttons columns is-align-items-center">
             <b-button class="column is-secondary" tag="router-link"  to="/businessform" size="is-large">I am a business</b-button>
-            <b-button class="column is-primary" tag="router-link" to="/userform" size="is-large">I am a User</b-button>
+            <b-button class="column is-primary" tag="router-link" to="/userform" size="is-large">I am an individual</b-button>
         </div>
     </div>
   </div>
