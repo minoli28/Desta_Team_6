@@ -50,6 +50,9 @@
     <div v-if="ShowText">
       <pre style="max-height: 400px"><b>User Object:</b>{{ user }}</pre>
     </div>
+    <a href="/businessform">
+    <p class="content" ><b>Not a User? Use this form</b></p>
+    </a>
   </div>
 </template>
 
@@ -121,6 +124,10 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
+.content{
+  text-decoration: underline;
+  text-emphasis-color: blue;
+}
 h3 {
   margin: 40px 0 0;
 }
