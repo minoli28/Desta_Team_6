@@ -1,8 +1,8 @@
 <template>
   <div class="container is-max-desktop">
     <div class="box">
-      <h2 class="content"><b>Business Form</b></h2>
-      <section align="left">
+        <h2 class="content"><b>Business Form</b> </h2>
+      <section align= "left">
         <b-field label="Name">
           <b-input v-model="business.name"></b-input>
         </b-field>
@@ -70,12 +70,11 @@ export default {
         "Lodging / Tourism",
         "Logging, Timber & Paper Mills",
         "Manufacturing, Misc",
-        "Marijuana",
-        "Marijuana",
         "Marine Transport",
         "Meat processing & products",
         "Medical Supplies",
         "Mining",
+        "Engineering",
       ],
       name: "",
 
