@@ -6,6 +6,7 @@
       </a>
       <!-- <router-link to="/">Home</router-link> |
       <router-link to="/about">About</router-link> -->
+      
     </div>
     <router-view />
   </div>
@@ -117,7 +118,6 @@ body {
   background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
   background-size: 400% 400%;
   animation: gradient 90s ease infinite;
-  height: 100vh;
 }
 
 @keyframes gradient {
