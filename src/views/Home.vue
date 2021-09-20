@@ -21,7 +21,7 @@
               >I am an individual</b-button
             >
           </div>
-          <a class="link" style="" href="/ExistingUser">I am a returning user</a>
+          <a class="link" style="" tag="router-link" to="/ExistingUser" href="/ExistingUser">I am a returning user</a>
         </div>
       </div>
     </section>
