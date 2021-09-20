@@ -10,6 +10,7 @@
     "runApp": "python /home/ec2-user/desta_team_6/app.py"
   },
   "dependencies": {
+    "axios": "^0.21.4",
     "buefy": "^0.9.10",
     "core-js": "^3.6.5",
     "vue": "^2.6.11",

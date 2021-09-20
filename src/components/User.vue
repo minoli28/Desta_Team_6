@@ -1,6 +1,6 @@
 <template>
   <div class="container is-max-desktop">
-    <div class="box ">
+    <div class="box">
       <p class="content"><b>User Form</b></p>
       <section align="left">
         <b-field label="Name">
@@ -45,7 +45,7 @@
           <button
             v-if="option"
             class="button"
-            style="margin-top: 10px;color: red"
+            style="margin-top: 10px; color: red"
             @click="user.chosen_option = []"
           >
             Clear
@@ -58,7 +58,7 @@
         </div>
       </section>
       <button
-        @click="ShowText = true"
+        @click="submit()"
         class="button is-primary"
         style="margin-top: 5px"
       >
@@ -75,12 +75,13 @@
 </template>
 
 <script>
+import axios from "axios";
 export default {
   data() {
     return {
       option: "",
       ShowText: false,
-      user: {chosen_option:[]},
+      user: { chosen_option: [] },
       tags: [],
       filteredTags: [],
       isSelectOnly: false,
@@ -98,7 +99,6 @@ export default {
         "Music & Dance",
         "Hair",
         "Other Services",
-
       ],
       name: "",
       selected: null,
@@ -123,23 +123,25 @@ export default {
     getFilteredTags(text) {
       console.log(text);
       this.filteredTags = this.data.filter((option) => {
-        return (
-          option
-            .toString()
-            .toLowerCase()
-            .indexOf(text.toLowerCase()) >= 0
-        );
+        return option.toString().toLowerCase().indexOf(text.toLowerCase()) >= 0;
       });
+    },
+    submit() {
+      this.ShowText = true;
+      const headers = {
+        Authorization: "Bearer my-token",
+        "My-Custom-Header": "foobar",
+      };
+      axios
+        .post("[website http address]:PORT/addUser/", this.user, { headers })
+        .then((response) => console.log(response));
     },
   },
   computed: {
     filteredDataArray() {
       return this.data.filter((option) => {
         return (
-          option
-            .toString()
-            .toLowerCase()
-            .indexOf(this.name.toLowerCase()) >= 0
+          option.toString().toLowerCase().indexOf(this.name.toLowerCase()) >= 0
         );
       });
     },
