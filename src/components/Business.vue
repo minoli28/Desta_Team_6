@@ -34,7 +34,7 @@
         <b-field label="Telephone">
           <b-input v-model="business.telephone" required></b-input>
         </b-field>
-        
+
         <b-collapse class="card" animation="slide" aria-id="contentIdForA11y3">
           <template #trigger="props">
             <div
@@ -52,25 +52,31 @@
           </template>
           <div style="padding: 15px">
             <b-field label="Website">
-              <b-input v-model="business.website" placeholder="https//:"></b-input>
+              <b-input
+                v-model="business.website"
+                placeholder="https//:"
+              ></b-input>
             </b-field>
             <b-field label="Instagram Handle">
-              <b-input v-model="business.insta_handle" placeholder="@"></b-input>
+              <b-input
+                v-model="business.insta_handle"
+                placeholder="@"
+              ></b-input>
             </b-field>
           </div>
         </b-collapse>
       </section>
       <button
-        @click="ShowText = true"
+        @click="submit()"
         class="button is-primary"
         style="margin-top: 5px"
       >
         Submit
       </button>
     </div>
-    <div v-if="ShowText">
+    <!-- <div v-if="ShowText">
       <pre style="max-height: 400px"><b>Business Object:</b>{{ business }}</pre>
-    </div>
+    </div> -->
     <a href="/userform">
       <p class="content"><b>Not a Business? Use this form</b></p>
     </a>
@@ -78,6 +84,8 @@
 </template>
 
 <script>
+import { API } from "aws-amplify";
+import { createBusiness } from "@/graphql/mutations";
 export default {
   data() {
     return {
@@ -101,6 +109,29 @@ export default {
 
       selected: null,
     };
+  },
+  methods: {
+    async submit() {
+      try {
+        const businessResponse = await API.graphql({
+          query: createBusiness,
+          variables: { input: this.business },
+        });
+
+        console.log(businessResponse.data.createBusiness);
+        this.registeredBusiness = businessResponse.data.createBusiness;
+        this.$buefy.notification.open({
+          message: "Successfully Created Your Business. Users Can contact you!",
+          type: "is-success",
+        });
+      } catch (error) {
+        console.log(error);
+        this.$buefy.notification.open({
+          message: "An error Occured!",
+          type: "is-danger",
+        });
+      }
+    },
   },
   computed: {
     filteredDataArray() {

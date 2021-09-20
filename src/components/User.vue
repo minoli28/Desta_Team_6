@@ -1,6 +1,6 @@
 <template>
   <div class="container is-max-desktop">
-    <div class="box">
+    <div class="box" v-if="!userRegistered">
       <p class="content"><b>User Form</b></p>
       <section align="left">
         <b-field label="Name">
@@ -16,7 +16,7 @@
           <b-input v-model="user.telephone"></b-input>
         </b-field>
 
-        <!-- <b-field label="Choose Industry Interest">
+        <!-- <b-field label="Choose industries Interest">
           <b-taginput
             v-model="user.tags"
             :data="filteredTags"
@@ -65,24 +65,29 @@
         Submit
       </button>
     </div>
-    <div v-if="ShowText">
+    <!-- <div v-if="ShowText">
       <pre style="max-height: 400px"><b>User Object:</b>{{ user }}</pre>
-    </div>
-    <a href="/businessform">
+    </div> -->
+    <Cards :businesses="businesses" v-if="userRegistered" />
+    <a href="/businessform" v-if="!userRegistered">
       <p class="content"><b>Not an Individual? Use this form</b></p>
     </a>
   </div>
 </template>
 
 <script>
-import { API } from 'aws-amplify';
-import { createUser } from '@/graphql/mutations';
-import axios from "axios";
+import { API } from "aws-amplify";
+import { createUser } from "@/graphql/mutations";
+import { listBusinesses } from "@/graphql/queries";
+import Cards from "@/components/Cards.vue";
+// import axios from "axios";
 export default {
   data() {
     return {
       option: "",
-      ShowText: false,
+      registeredUser: null,
+      businesses: [],
+      userRegistered: false,
       user: { chosen_option: [] },
       tags: [],
       filteredTags: [],
@@ -106,6 +111,7 @@ export default {
       selected: null,
     };
   },
+  components: { Cards },
   methods: {
     changeOption(option) {
       console.log(option);
@@ -125,11 +131,43 @@ export default {
     getFilteredTags(text) {
       console.log(text);
       this.filteredTags = this.data.filter((option) => {
-        return option.toString().toLowerCase().indexOf(text.toLowerCase()) >= 0;
+        return (
+          option
+            .toString()
+            .toLowerCase()
+            .indexOf(text.toLowerCase()) >= 0
+        );
       });
     },
-    submit() {
+    async getBusinesses() {
+      console.log(this.registeredUser.chosen_industries)
+      this.registeredUser.chosen_industries =  JSON.parse(this.registeredUser.chosen_industries)
+      for (let i = 0; i < this.registeredUser.chosen_industries.length; i++) {
+        let filter = {
+          industry: {
+            eq: this.registeredUser.chosen_industries[i], // filter priority = 1
+          },
+        };
+        try {
+          const businesses = await API.graphql({
+            query: listBusinesses,
+            variables: { filter: filter },
+          });  
+          console.log(businesses.data.listBusinesses.items)
+          // this.businesses.push(businesses.data.listBusinesses.items);
+          this.businesses = this.businesses.concat(businesses.data.listBusinesses.items)
+          // this.businesses = businesses.data.listBusinesses.items;
+        } catch (error) {
+          console.log(error)
+        }
+      }
+
+    },
+    async submit() {
       this.ShowText = true;
+      var createdUser = this.user;
+      createdUser.chosen_industries = JSON.stringify(createdUser.chosen_option);
+      delete createdUser.chosen_option;
       // const headers = {
       //   Authorization: "Bearer my-token",
       //   "My-Custom-Header": "foobar",
@@ -138,12 +176,17 @@ export default {
       //   .post("[website http address]:PORT/addUser/", this.user, { headers })
       //   .then((response) => console.log(response));
       try {
-         await API.graphql({
-        query: createUser,
-        variables: {input: this.user},
-      });
+        const userResponse = await API.graphql({
+          query: createUser,
+          variables: { input: createdUser },
+        });
+        console.log(userResponse.data.createUser);
+        this.userRegistered = true;
+        this.registeredUser = userResponse.data.createUser;
+
+        this.getBusinesses()
       } catch (error) {
-        console.log(error)
+        console.log(error);
       }
     },
   },
@@ -151,7 +194,10 @@ export default {
     filteredDataArray() {
       return this.data.filter((option) => {
         return (
-          option.toString().toLowerCase().indexOf(this.name.toLowerCase()) >= 0
+          option
+            .toString()
+            .toLowerCase()
+            .indexOf(this.name.toLowerCase()) >= 0
         );
       });
     },
