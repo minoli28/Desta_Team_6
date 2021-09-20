@@ -69,6 +69,7 @@
       <pre style="max-height: 400px"><b>User Object:</b>{{ user }}</pre>
     </div> -->
     <Cards :businesses="businesses" v-if="userRegistered" />
+    <div v-if="hide">There is not enough information, Please come back later</div>
     <a href="/businessform" v-if="!userRegistered">
       <p class="content"><b>Not an Individual? Use this form</b></p>
     </a>
@@ -85,6 +86,7 @@ export default {
   data() {
     return {
       option: "",
+      hide: null,
       registeredUser: null,
       businesses: [],
       userRegistered: false,
@@ -157,6 +159,9 @@ export default {
           // this.businesses.push(businesses.data.listBusinesses.items);
           this.businesses = this.businesses.concat(businesses.data.listBusinesses.items)
           // this.businesses = businesses.data.listBusinesses.items;
+          if (this.businesses.length==0){
+            this.hide= true
+          }
         } catch (error) {
           console.log(error)
         }

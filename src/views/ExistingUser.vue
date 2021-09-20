@@ -1,7 +1,8 @@
 <template>
   <div class="existing-user container is-max-desktop">
     <b-field class="is-primary" label="Email" v-if="!userRegistered">
-      <b-input class="is-primary" type="email" v-model="email" maxlength="30"> </b-input>
+      <b-input class="is-primary" type="email" v-model="email" maxlength="30">
+      </b-input>
     </b-field>
     <button
       class="button is-primary"
@@ -12,6 +13,9 @@
       Search User
     </button>
     <Cards :businesses="businesses" v-if="userRegistered" />
+    <div v-if="hide">
+      There is not enough information, Please come back later
+    </div>
   </div>
 </template>
 
@@ -26,6 +30,7 @@ export default {
   data() {
     return {
       email: "",
+      hide: null,
       registeredUser: null,
       businesses: [],
       userRegistered: false,
@@ -53,6 +58,9 @@ export default {
           this.businesses = this.businesses.concat(
             businesses.data.listBusinesses.items
           );
+          if (this.businesses.length == 0) {
+            this.hide = true;
+          }
           // this.businesses = businesses.data.listBusinesses.items;
         } catch (error) {
           console.log(error);
