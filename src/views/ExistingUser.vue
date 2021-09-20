@@ -14,7 +14,7 @@
     </button>
     <Cards :businesses="businesses" v-if="userRegistered" />
     <div v-if="hide">
-      There is not enough information, Please come back later
+      Thanks for using Desta's Platform. We couldn't find any information for you😥
     </div>
   </div>
 </template>
@@ -58,7 +58,7 @@ export default {
           this.businesses = this.businesses.concat(
             businesses.data.listBusinesses.items
           );
-          if (this.businesses.length == 0) {
+          if (this.businesses.length <= 1) {
             this.hide = true;
           }
           // this.businesses = businesses.data.listBusinesses.items;

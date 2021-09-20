@@ -69,7 +69,7 @@
       <pre style="max-height: 400px"><b>User Object:</b>{{ user }}</pre>
     </div> -->
     <Cards :businesses="businesses" v-if="userRegistered" />
-    <div v-if="hide">There is not enough information, Please come back later</div>
+    <div v-if="hide">Thanks for using Desta's Platform. We couldn't find any information for you😥</div>
     <a href="/businessform" v-if="!userRegistered">
       <p class="content"><b>Not an Individual? Use this form</b></p>
     </a>
@@ -159,7 +159,7 @@ export default {
           // this.businesses.push(businesses.data.listBusinesses.items);
           this.businesses = this.businesses.concat(businesses.data.listBusinesses.items)
           // this.businesses = businesses.data.listBusinesses.items;
-          if (this.businesses.length==0){
+          if (this.businesses.length<=1){
             this.hide= true
           }
         } catch (error) {
