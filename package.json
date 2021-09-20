@@ -7,9 +7,12 @@
     "build": "vue-cli-service build",
     "lint": "vue-cli-service lint",
     "start": "npm run dev",
-    "runApp": "python app.py"
+    "runApp": "python /home/ec2-user/desta_team_6/app.py"
   },
   "dependencies": {
+    "@aws-amplify/ui-vue": "^1.1.10",
+    "aws-amplify": "^4.2.10",
+    "axios": "^0.21.4",
     "buefy": "^0.9.10",
     "core-js": "^3.6.5",
     "vue": "^2.6.11",
