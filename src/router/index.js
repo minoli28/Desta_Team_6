@@ -34,6 +34,22 @@ const routes = [
     // which is lazy-loaded when the route is visited.
     component: () => import(/* webpackChunkName: "about" */ '../components/Business.vue')
   },
+  {
+    path: '/card',
+    name: 'card',
+    // route level code-splitting
+    // this generates a separate chunk (about.[hash].js) for this route
+    // which is lazy-loaded when the route is visited.
+    component: () => import(/* webpackChunkName: "about" */ '../components/Card.vue')
+  },
+  {
+    path: '/cards',
+    name: 'cards',
+    // route level code-splitting
+    // this generates a separate chunk (about.[hash].js) for this route
+    // which is lazy-loaded when the route is visited.
+    component: () => import(/* webpackChunkName: "about" */ '../components/Cards.vue')
+  },
 ]
 
 const router = new VueRouter({

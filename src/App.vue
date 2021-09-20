@@ -61,6 +61,9 @@ export default {
       
     }
   },
+  methods: {
+    
+  },
 }
 </script>
 
@@ -117,7 +120,9 @@ body {
 body {
   background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
   background-size: 400% 400%;
-  animation: gradient 90s ease infinite;
+  animation: gradient 80s ease infinite;
+  height: 100%;
+  min-height: 800px;
 }
 
 @keyframes gradient {
