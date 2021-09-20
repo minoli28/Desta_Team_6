@@ -16,7 +16,7 @@
           <b-input v-model="user.telephone"></b-input>
         </b-field>
 
-        <b-field label="Choose Industry Interest">
+        <!-- <b-field label="Choose Industry Interest">
           <b-taginput
             v-model="user.tags"
             :data="filteredTags"
@@ -28,8 +28,8 @@
             @typing="getFilteredTags"
           >
           </b-taginput>
-        </b-field>
-        <b-field label="Chosen Interests">
+        </b-field> -->
+        <b-field label="Personal Interest">
           <b-select
             expanded
             clearable
@@ -46,7 +46,7 @@
             v-if="option"
             class="button"
             style="margin-top: 10px;color: red"
-            @click="chosen_option = []"
+            @click="user.chosen_option = []"
           >
             Clear
           </button>
@@ -54,7 +54,7 @@
         <div v-if="option != ''">
           <pre
             style="max-height: 400px"
-          ><b>Chosen Industries:</b> {{chosen_option}}</pre>
+          ><b>Chosen Industries:</b> {{user.chosen_option}}</pre>
         </div>
       </section>
       <button
@@ -78,36 +78,27 @@
 export default {
   data() {
     return {
-      chosen_option: [],
       option: "",
       ShowText: false,
-      user: {},
+      user: {chosen_option:[]},
       tags: [],
       filteredTags: [],
       isSelectOnly: false,
       allowNew: false,
       data: [
-        "Industrial Unions",
-        "Insurance",
-        "Internet",
-        "Israel Policy",
-        "Labor",
-        "Lawyers & Lobbyists",
-        "Lawyers / Law Firms",
-        "Leadership PACs",
-        "LGBTQIA Rights & Issues",
-        "Liberal/Democratic",
-        "Liquor, Wine & Beer",
-        "Livestock",
-        "Lobbyists",
-        "Lodging / Tourism",
-        "Logging, Timber & Paper Mills",
-        "Manufacturing, Misc",
-        "Marijuana",
-        "Marine Transport",
-        "Meat processing & products",
-        "Medical Supplies",
-        "Mining",
+        "Food",
+        "Beauty",
+        "Fashion",
+        "Consultants",
+        "HOW TO",
+        "Photography",
+        "Health",
+        "Community",
+        "Art",
+        "Music & Dance",
+        "Hair",
+        "Other Services",
+
       ],
       name: "",
       selected: null,
@@ -125,8 +116,8 @@ export default {
       //     this.option = ""
       //   }
       // });
-      if (this.chosen_option.some((opt) => opt == option)) return;
-      this.chosen_option.push(option);
+      if (this.user.chosen_option.some((opt) => opt == option)) return;
+      this.user.chosen_option.push(option);
       console.log("done");
     },
     getFilteredTags(text) {

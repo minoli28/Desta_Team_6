@@ -34,10 +34,7 @@
         <b-field label="Telephone">
           <b-input v-model="business.telephone" required></b-input>
         </b-field>
-        <b-field label="Email">
-          <b-input type="email" v-model="business.email" maxlength="30">
-          </b-input>
-        </b-field>
+        
         <b-collapse class="card" animation="slide" aria-id="contentIdForA11y3">
           <template #trigger="props">
             <div
@@ -87,27 +84,18 @@ export default {
       ShowText: false,
       business: { industry: "" },
       data: [
-        "Industrial Unions",
-        "Insurance",
-        "Internet",
-        "Israel Policy",
-        "Labor",
-        "Lawyers & Lobbyists",
-        "Lawyers / Law Firms",
-        "Leadership PACs",
-        "LGBTQIA Rights & Issues",
-        "Liberal/Democratic",
-        "Liquor, Wine & Beer",
-        "Livestock",
-        "Lobbyists",
-        "Lodging / Tourism",
-        "Logging, Timber & Paper Mills",
-        "Manufacturing, Misc",
-        "Marine Transport",
-        "Meat processing & products",
-        "Medical Supplies",
-        "Mining",
-        "Engineering",
+        "Food",
+        "Beauty",
+        "Fashion",
+        "Consultants",
+        "HOW TO",
+        "Photography",
+        "Health",
+        "Community",
+        "Art",
+        "Music & Dance",
+        "Hair",
+        "Other Services",
       ],
       name: "",
 

@@ -1,7 +1,7 @@
 <template>
   <div class="container is-max-desktop">
     <!-- <img alt="Vue logo" src="../assets/logo.png"> -->
-    <!-- <HelloWorld msg="Welcome to Your Vue.js App"/> -->
+    <!-- <Business msg="Welcome to Your Vue.js App"/> -->
     <section class="hero is-large">
       <div class="hero-body">
     <div class="container has-text-centered">
@@ -18,12 +18,12 @@
 
 <script>
 // @ is an alias to /src
-// import HelloWorld from '@/components/HelloWorld.vue'
+// import Business from '@/components/Business.vue'
 
 export default {
   name: 'Home',
   components: {
-    // HelloWorld
+    // Business
   }
 }
 </script>
