@@ -1,0 +1,18 @@
+type User @model @auth(rules: [{allow: public}]) {
+  id: ID!
+  chosen_industries: String
+  name: String
+  email: AWSEmail
+  telephone: String
+}
+
+type Business @model @auth(rules: [{allow: public}]) {
+  id: ID!
+  name: String
+  email: AWSEmail
+  industry: String
+  location: String
+  telephone: String
+  website: String
+  insta_handle: String
+}

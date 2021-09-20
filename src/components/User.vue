@@ -75,6 +75,8 @@
 </template>
 
 <script>
+import { API } from 'aws-amplify';
+import { createUser } from '@/graphql/mutations';
 import axios from "axios";
 export default {
   data() {
@@ -128,13 +130,21 @@ export default {
     },
     submit() {
       this.ShowText = true;
-      const headers = {
-        Authorization: "Bearer my-token",
-        "My-Custom-Header": "foobar",
-      };
-      axios
-        .post("[website http address]:PORT/addUser/", this.user, { headers })
-        .then((response) => console.log(response));
+      // const headers = {
+      //   Authorization: "Bearer my-token",
+      //   "My-Custom-Header": "foobar",
+      // };
+      // axios
+      //   .post("[website http address]:PORT/addUser/", this.user, { headers })
+      //   .then((response) => console.log(response));
+      try {
+         await API.graphql({
+        query: createUser,
+        variables: {input: this.user},
+      });
+      } catch (error) {
+        console.log(error)
+      }
     },
   },
   computed: {
