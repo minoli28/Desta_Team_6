@@ -7,7 +7,7 @@
     "build": "vue-cli-service build",
     "lint": "vue-cli-service lint",
     "start": "npm run dev",
-    "runApp": "python app.py"
+    "runApp": "python /home/ec2-user/desta_team_6/app.py"
   },
   "dependencies": {
     "buefy": "^0.9.10",
